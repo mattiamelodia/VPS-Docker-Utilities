@@ -1,0 +1,20 @@
+volumes:
+  gotify_data:
+    external: true
+
+networks:
+  reverse-proxy:
+    external: true
+
+services:
+  gotify:
+    image: gotify/server:latest
+    container_name: gotify
+    hostname: gotify
+    restart: unless-stopped
+    labels:
+      - "com.centurylinklabs.watchtower.enable=true"
+    volumes:
+      - gotify_data:/app/data
+    networks:
+      - reverse-proxy
