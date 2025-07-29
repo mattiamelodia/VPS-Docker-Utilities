@@ -13,8 +13,3 @@ This repository contains Docker Compose configurations for a suite of server uti
 ## Initial Access
 
 Consult specific service documentation for default access points and credentials.
-
-## Credits and Attribution
-
-The structure and initial Docker Compose setup for this repository (including the `Makefile` and `docker/service/docker-compose.yml` pattern) were inspired by/adapted from the following project:
-https://github.com/Zavy86/video-corso-vps
