@@ -19,7 +19,7 @@ endef
 
 # Initialization
 init:
-    -@docker network inspect reverse-proxy >/dev/null 2>&1 || docker network create --driver bridge reverse-proxy
+	docker network create --driver bridge reverse-proxy
 
 # Remove Stack
 remove:
