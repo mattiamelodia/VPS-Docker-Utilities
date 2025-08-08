@@ -1,6 +1,7 @@
 # to ignore file -> /file.extension
 # to ignore directory -> directory/
 
-.env
+**/.env
+
 *.log
 temp/
