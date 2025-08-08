@@ -2,40 +2,40 @@
 # [execute: down, remove, pull, build, up]
 # $(call docker_rebuild,"stack_name")
 define docker_rebuild
-	docker compose -p $(1) --env-file docker/$(1)/.env -f docker/$(1)/docker-compose.yml down && \
-	docker compose -p $(1) --env-file docker/$(1)/.env -f docker/$(1)/docker-compose.yml rm -f && \
-	docker compose -p $(1) --env-file docker/$(1)/.env -f docker/$(1)/docker-compose.yml pull && \
-	docker compose -p $(1) --env-file docker/$(1)/.env -f docker/$(1)/docker-compose.yml build --no-cache && \
-	docker compose -p $(1) --env-file docker/$(1)/.env -f docker/$(1)/docker-compose.yml up -d
+	docker compose -p $(1) -f docker/$(1)/docker-compose.yml down && \
+	docker compose -p $(1) -f docker/$(1)/docker-compose.yml rm -f && \
+	docker compose -p $(1) -f docker/$(1)/docker-compose.yml pull && \
+	docker compose -p $(1) -f docker/$(1)/docker-compose.yml build --no-cache && \
+	docker compose -p $(1) -f docker/$(1)/docker-compose.yml up -d
 endef
 
 # Function: Docker Remove (stops and removes containers)
 # [execute: down, remove]
 # $(call docker_remove,"stack_name")
 define docker_remove
-	docker compose -p $(1) --env-file docker/$(1)/.env -f docker/$(1)/docker-compose.yml down && \
-	docker compose -p $(1) --env-file docker/$(1)/.env -f docker/$(1)/docker-compose.yml rm -f
+	docker compose -p $(1) -f docker/$(1)/docker-compose.yml down && \
+	docker compose -p $(1) -f docker/$(1)/docker-compose.yml rm -f
 endef
 
 # Function: Docker Stop
 # [execute: stop]
 # $(call docker_stop,"stack_name")
 define docker_stop
-	docker compose -p $(1) --env-file docker/$(1)/.env -f docker/$(1)/docker-compose.yml stop
+	docker compose -p $(1) -f docker/$(1)/docker-compose.yml stop
 endef
 
 # Function: Docker Start (brings up existing containers or starts new ones without rebuilding)
 # [execute: up -d]
 # $(call docker_start,"stack_name")
 define docker_start
-	docker compose -p $(1) --env-file docker/$(1)/.env -f docker/$(1)/docker-compose.yml up -d
+	docker compose -p $(1) -f docker/$(1)/docker-compose.yml up -d
 endef
 
 # Function: Docker Clean (stops, removes containers and associated volumes)
 # [execute: down -v]
 # $(call docker_clean,"stack_name")
 define docker_clean
-	docker compose -p $(1) --env-file docker/$(1)/.env -f docker/$(1)/docker-compose.yml down -v
+	docker compose -p $(1) -f docker/$(1)/docker-compose.yml down -v
 endef
 
 # Initialization
@@ -99,12 +99,6 @@ it-tools:
 # Glances
 glances:
 	$(call docker_rebuild,"glances")
-
-# Whatsapp API
-whatsapp-api:
-	docker volume create evolution_api_data || true
-	docker volume create mongodb_whatsapp_data || true
-	$(call docker_rebuild,"whatsapp-api")
 
 # ALL: Group targets
 
